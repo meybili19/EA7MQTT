@@ -67,4 +67,7 @@ def publish_message():
 
 if __name__ == '__main__':
     mqtt_client.loop_start()  
+    # Print the URLs where the app and Swagger documentation can be accessed
+    print("App running at: http://localhost:5000/")
+    print("Swagger documentation available at: http://localhost:5000/apidocs")
     app.run(debug=True, host='0.0.0.0', port=5000)
