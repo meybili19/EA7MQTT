@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World MQTT</title>
+</head>
+<body>
+    <h2>MQTT Architecture Style</h2>
+    <h3>Last received message: {{ message }}</h3>
+
+    <form id="messageForm">
+        <label for="messageInput">Write your message:</label>
+        <input type="text" id="messageInput" name="message" required>
+        <button type="submit">Send MQTT Message</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('messageForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const formData = new FormData(form);
+
+            fetch('/publish', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message + ": " + data.content);
+                location.reload(); 
+            })
+            .catch(err => console.error(err));
+        });
+    </script>
+</body>
+</html>
+
